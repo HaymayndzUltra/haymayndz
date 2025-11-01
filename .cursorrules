@@ -1,0 +1,47 @@
+# Context Preload Rule for Protocol 02 Discovery Calls
+
+## Automatic Context Loading
+
+**[STRICT]** On conversation start, if `.cursor/cache/preload_context.json` exists, load it immediately.
+
+**Loading Protocol:**
+1. Check if cache file exists: `.cursor/cache/preload_context.json`
+2. If exists, read metadata to confirm 42 files loaded
+3. When user asks about discovery call artifacts, reference files from cache:
+   - `question-bank.md` → Questions to ask client
+   - `scenario-guides.md` → Scenario frameworks
+   - `discovery-brief.md` → Business context
+   - `call-agenda.md` → Call structure
+   - All other Protocol 02 artifacts
+
+**Cache File Location:** `/home/haymayndz/.nv/.cursor/cache/preload_context.json`
+
+**Expected Contents:**
+- 42 files total
+- 313,302 characters
+- 4 rules files
+- 3 protocol files  
+- 34 artifact files
+
+**When Cache is Missing:**
+- Prompt user to run: `python3 .cursor/scripts/load_context.py`
+- Or manually load individual artifact files as needed
+
+**Context Refresh:**
+- User can refresh by running the load script again
+- Cache regenerates with latest files automatically
+
+---
+
+## Live Discovery Call Mode
+
+When user mentions "discovery call" or "client call", activate full Protocol 02 context:
+- Load all artifacts from cache
+- Reference question-bank.md for questions
+- Use scenario-guides.md for frameworks
+- Apply Filipino English communication rules (english-speak.mdc)
+
+---
+
+**Note:** This rule ensures context is available but doesn't auto-load all 313K characters into memory (too large). Instead, reference cache file structure and load specific files on-demand when needed.
+

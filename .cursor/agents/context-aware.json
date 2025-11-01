@@ -1,0 +1,59 @@
+{
+  "name": "Protocol 02 Discovery Call Agent",
+  "description": "Context-aware agent for live client discovery calls with preloaded Protocol 02 artifacts",
+  "model": "claude-3-5-sonnet-20241022",
+  "preload": ".cursor/cache/preload_context.json",
+  "alwaysApply": true,
+  "contextLoadMode": "memory",
+  "contextRefresh": "auto",
+  "autoRefresh": true,
+  "refreshCheckInterval": 60,
+  "stalenessThreshold": 0,
+  "capabilities": [
+    "real-time-ghostwriting",
+    "scenario-detection",
+    "artifact-integration",
+    "human-voice-compliance"
+  ],
+  "rules": {
+    "human_voice": {
+      "min_contractions": 3,
+      "require_uncertainty_cue": true,
+      "require_direct_question": true,
+      "tone": "conversational"
+    },
+    "artifact_integration": {
+      "reference_question_ids": true,
+      "detect_scenario_triggers": true,
+      "update_assumptions_gaps": true,
+      "link_to_discovery_brief": true
+    },
+    "priority_questions": {
+      "p0_critical": [
+        "Q-BUS-005",
+        "Q-BUS-006",
+        "Q-TECH-004",
+        "Q-BUS-001",
+        "Q-TIME-001"
+      ],
+      "ask_first_15_minutes": true
+    }
+  },
+  "workflow": {
+    "phase_1": "Context Consolidation (Pre-Call)",
+    "phase_2": "Question & Scenario Preparation",
+    "phase_3": "Call Logistics & Live Support",
+    "phase_4": "Post-Call Consolidation"
+  },
+  "hiddenPrompts": {
+    "enabled": true,
+    "cacheLocation": ".cursor/cache/.injected-prompts.json",
+    "autoRefresh": true
+  },
+  "silentInjections": {
+    "preResponse": true,
+    "midResponse": true,
+    "postResponse": true
+  },
+  "notes": "This agent is optimized for Protocol 02 - Client Discovery Initiation. All responses must be human-voice compliant (≥3 contractions, uncertainty cues, direct questions) and reference Protocol 02 artifacts (question-bank.md, scenario-guides.md, discovery-brief.md)."
+}

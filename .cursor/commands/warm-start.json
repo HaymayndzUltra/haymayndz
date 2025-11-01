@@ -1,0 +1,24 @@
+{
+  "name": "Warm Start Context",
+  "description": "Preloads all Protocol 02 artifacts, rules, and context into memory before discovery call",
+  "script": "python .cursor/scripts/load_context.py",
+  "category": "Protocol 02",
+  "shortcut": "Cmd+Shift+W",
+  "when": "before_discovery_call",
+  "outputs": [
+    ".cursor/cache/preload_context.json"
+  ],
+  "validation": {
+    "check_files_exist": [
+      ".cursor/rules/master-rules/1-master-rule-context-discovery.mdc",
+      ".cursor/common-rules/live-interviews-discovery-context.mdc",
+      ".cursor/ai-driven-workflow/02-client-discovery-initiation.md",
+      ".artifacts/protocol-02/question-bank.md",
+      ".artifacts/protocol-02/scenario-guides.md",
+      ".artifacts/protocol-02/discovery-brief.md"
+    ],
+    "min_files_loaded": 10
+  },
+  "success_message": "✅ Context loaded. Ready for discovery call!",
+  "error_message": "❌ Context loading failed. Check if all Protocol 02 artifacts exist."
+}

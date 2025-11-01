@@ -1,0 +1,45 @@
+{
+  "exact_quotes": [
+    "I've reached the point where I need an experienced builder's perspective.",
+    "This isn't a code-heavy role. It's a guidance + collaboration role — helping me make smart technical decisions, structure things the right way, and move confidently from idea → MVP → production."
+  ],
+  "tech_stack": [
+    "Next.js",
+    "Node",
+    "Supabase",
+    "Postgres",
+    "Zapier/n8n",
+    "AI/LLM integrations"
+  ],
+  "pain_points": [
+    "Reached point where need experienced builder's perspective",
+    "Need help understanding what I don't know I don't know",
+    "Want to avoid rookie mistakes",
+    "Looking to move faster from idea to MVP to production"
+  ],
+  "tone_type": "casual",
+  "urgency_signals": [
+    "already well-defined conceptually",
+    "partially in motion",
+    "reached the point where",
+    "move confidently"
+  ],
+  "vague_requirements": [
+    {
+      "client_says": "flexible schedule (start part-time)",
+      "interpretation_needed": true,
+      "clarifying_question": "What's the expected weekly time commitment for part-time engagement?"
+    },
+    {
+      "client_says": "Act as a technical mentor and advisor",
+      "interpretation_needed": true,
+      "clarifying_question": "What's the preferred communication format: scheduled calls, async chat, or both?"
+    },
+    {
+      "client_says": "Help accelerate my technical learning curve",
+      "interpretation_needed": true,
+      "clarifying_question": "Are there specific technical areas where you want to focus first, or should I assess based on current progress?"
+    }
+  ]
+}
+

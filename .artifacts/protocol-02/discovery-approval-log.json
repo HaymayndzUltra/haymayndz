@@ -1,0 +1,17 @@
+{
+  "protocol": "02",
+  "last_updated": "2025-01-27",
+  "approval_log": [
+    {
+      "date": "2025-01-27",
+      "status": "draft",
+      "notes": "Discovery recap drafted, awaiting client review"
+    }
+  ],
+  "approval_status": "awaiting_client",
+  "recap_sent_date": null,
+  "recap_approved_date": null,
+  "client_response_date": null,
+  "notes": "Update this log after sending recap and receiving client approval"
+}
+

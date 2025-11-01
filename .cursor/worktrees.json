@@ -1,0 +1,6 @@
+{
+  "setup-worktree": [
+    "chmod +x scripts/*.sh scripts/*.py 2>/dev/null || true",
+    "echo '✅ Worktree setup complete. This workspace is ready for project generation.'"
+  ]
+}

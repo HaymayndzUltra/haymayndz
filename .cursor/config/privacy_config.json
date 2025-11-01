@@ -1,0 +1,41 @@
+{
+  "pii_detection": {
+    "enabled": true,
+    "mask_all": false,
+    "detect_emails": true,
+    "detect_phones": true,
+    "detect_credit_cards": true,
+    "detect_ssns": true,
+    "detect_ip_addresses": true,
+    "detect_names": false
+  },
+  "data_retention": {
+    "logs_days": 30,
+    "cache_days": 90,
+    "metrics_days": 365,
+    "error_logs_days": 60,
+    "backup_files_days": 7
+  },
+  "secure_deletion": {
+    "enabled": true,
+    "overwrite_count": 3,
+    "methods": ["zero", "random", "zero"]
+  },
+  "compliance": {
+    "gdpr": {
+      "enabled": true,
+      "right_to_be_forgotten": true,
+      "data_portability": true
+    },
+    "ccpa": {
+      "enabled": true,
+      "opt_out": true
+    }
+  },
+  "logging": {
+    "anonymize_logs": true,
+    "anonymize_error_messages": true,
+    "anonymize_context": true
+  }
+}
+

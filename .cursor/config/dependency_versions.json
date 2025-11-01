@@ -1,0 +1,38 @@
+{
+  "python": "3.10+",
+  "dependencies": {
+    "watchdog": {
+      "version": ">=3.0.0",
+      "purpose": "File system monitoring for artifact changes"
+    }
+  },
+  "dev_dependencies": {
+    "pytest": {
+      "version": ">=7.4.0",
+      "purpose": "Testing framework"
+    },
+    "pytest-cov": {
+      "version": ">=4.1.0",
+      "purpose": "Code coverage reporting"
+    },
+    "black": {
+      "version": ">=23.0.0",
+      "purpose": "Code formatting"
+    },
+    "flake8": {
+      "version": ">=6.0.0",
+      "purpose": "Linting"
+    },
+    "mypy": {
+      "version": ">=1.5.0",
+      "purpose": "Type checking"
+    }
+  },
+  "security": {
+    "vulnerability_scanning": true,
+    "pinned_versions": false,
+    "update_frequency": "monthly"
+  },
+  "last_updated": "2025-01-27"
+}
+

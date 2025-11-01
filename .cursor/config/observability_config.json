@@ -1,0 +1,53 @@
+{
+  "logging": {
+    "level": "INFO",
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    "handlers": {
+      "file": {
+        "enabled": true,
+        "path": ".cursor/logs/app.log",
+        "rotation": "daily",
+        "retention": 30
+      },
+      "console": {
+        "enabled": true
+      },
+      "error_file": {
+        "enabled": true,
+        "path": ".cursor/logs/error_log.json",
+        "max_entries": 1000
+      }
+    }
+  },
+  "metrics": {
+    "collection_interval": 60,
+    "retention_days": 30,
+    "metrics_file": ".cursor/logs/metrics.json",
+    "enabled_metrics": [
+      "response_time",
+      "cache_hit_rate",
+      "validation_score",
+      "error_rate",
+      "operation_count"
+    ]
+  },
+  "alerts": {
+    "enabled": true,
+    "thresholds": {
+      "response_time_ms": 500,
+      "error_rate_percent": 5,
+      "cache_hit_rate_percent": 90,
+      "validation_score": 85
+    },
+    "notifications": {
+      "email": false,
+      "webhook": false
+    }
+  },
+  "health_check": {
+    "enabled": true,
+    "interval_seconds": 60,
+    "timeout_seconds": 5
+  }
+}
+

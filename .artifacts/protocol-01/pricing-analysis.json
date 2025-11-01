@@ -1,0 +1,56 @@
+{
+  "workload_estimation": {
+    "project_complexity": "moderate",
+    "weekly_hours_range": [10, 20],
+    "rationale": "Part-time mentoring role with flexible schedule. Client already making progress, needs guidance rather than hands-on coding."
+  },
+  "rate_tier": {
+    "tier": "mid-to-senior",
+    "hourly_rate": 100,
+    "rate_range": [75, 125],
+    "justification": "Mentoring + architectural guidance role requiring SaaS-building experience. Mid-to-senior tier appropriate for technical mentorship."
+  },
+  "pricing_structure": {
+    "approach": "hourly_with_cap",
+    "hourly_rate": 100,
+    "weekly_cap_hours": 15,
+    "weekly_cap_amount": 1500,
+    "monthly_estimate_hours": 60,
+    "monthly_estimate_amount": 6000,
+    "rationale": "Hourly approach with weekly cap provides flexibility while protecting both parties. Monthly estimate assumes 15 hours/week average."
+  },
+  "milestone_breakdown": null,
+  "market_benchmark": {
+    "similar_roles_range": [75, 150],
+    "my_rate": 100,
+    "percentile": "67th",
+    "within_range": true,
+    "validation": "Rate sits within 80-120% of market benchmark (75-150 range)"
+  },
+  "assumptions": [
+    "Part-time engagement means 10-20 hours/week",
+    "Flexible schedule allows for async communication",
+    "Focus is on guidance, not hands-on coding",
+    "Client wants to move from idea → MVP → production"
+  ],
+  "risk_notes": [
+    {
+      "risk": "Scope creep from mentoring to hands-on coding",
+      "mitigation": "Clearly define boundaries: guidance vs. implementation. Use clarifying questions in proposal."
+    },
+    {
+      "risk": "Vague 'part-time' definition could lead to expectation mismatch",
+      "mitigation": "Propose weekly hour cap (15 hours) with flexible scheduling."
+    },
+    {
+      "risk": "Client might expect full-time availability for part-time pay",
+      "mitigation": "Set clear communication boundaries: scheduled sessions + async availability windows."
+    }
+  ],
+  "clarifying_questions_for_pricing": [
+    "What's your expected weekly time commitment?",
+    "Do you prefer scheduled sessions or async communication?",
+    "Are there specific milestones or deadlines we should work toward?"
+  ]
+}
+

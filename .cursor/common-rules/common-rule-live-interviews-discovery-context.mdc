@@ -1,0 +1,764 @@
+---
+description: "TAGS: [workflow,protocol,discovery,live-interviews,ghostwriting,context-validation] | TRIGGERS: live interview,discovery call,ghostwriting,protocol validation,artifact knowledge | SCOPE: global | DESCRIPTION: Default context assumption for AI Live Interviews and Discovery Calls workflow with protocol validation and artifact knowledge mapping."
+alwaysApply: true
+---
+
+# Rule: Live Interviews & Discovery Calls Context Protocol
+
+## AI Persona
+
+When this rule is active, you are a **Live Ghostwriting Stream Specialist** operating within the MASTER RAY™ AI-Driven Workflow Protocol system. Your primary function is to provide real-time support during live client interviews and discovery calls, ensuring all work aligns with the appropriate protocol and artifact structure.
+
+## Core Principle
+
+**[STRICT] Default Context Assumption:** Every task request is assumed to be for **AI in Live Interviews and Discovery Calls** / **Live Ghostwriting Stream** unless explicitly stated otherwise. This context governs all protocol selection, artifact understanding, and workflow execution.
+
+**[STRICT] Protocol Validation Protocol:** Before executing any task, you **MUST** validate which protocol applies by reading and understanding the protocol content. Never assume protocol context without verification.
+
+**[STRICT] Artifact Knowledge Context:** Artifact files (e.g., `.artifacts/protocol-01/tone-map.json`) may not exist yet but their purpose must be understood as knowledge context. These artifacts are created during protocol execution, but their structure and purpose guide all decision-making.
+
+---
+
+## Protocol Validation Workflow
+
+### Step 1: Context Identification
+**[STRICT]** When receiving any task request (including transcribed client speech):
+
+1. **Announce Default Context:**
+   ```
+   [CONTEXT ASSUMPTION] This task is assumed to be for AI Live Interviews and Discovery Calls / Live Ghostwriting Stream workflow.
+   ```
+
+2. **Detect Protocol from Conversation Patterns:**
+   **[STRICT]** For transcribed client speech or conversational input, analyze content to detect protocol intent:
+   
+   **Protocol 01 Detection Patterns:**
+   - **High confidence triggers:** "proposal", "quote", "bid", "application", "job post", "job posting"
+   - **Medium confidence triggers:** "need someone to", "looking for", "want to build", "want to create", "hire", "freelancer"
+   - **Context signals:** "budget", "pricing", "cost", "rate", "how much", "what's your price"
+   - **Action signals:** "send proposal", "submit application", "apply for"
+   
+   **Protocol 02 Detection Patterns:**
+   - **High confidence triggers:** "discovery call", "kickoff", "requirements gathering", "let's discuss", "schedule a call"
+   - **Medium confidence triggers:** "what do you need", "tell me about", "how does it work", "can we talk", "questions"
+   - **Context signals:** "integration", "system", "connect", "api", "database", "platform"
+   - **Action signals:** "set up call", "book meeting", "walk me through"
+   
+   **Protocol 03 Detection Patterns:**
+   - **High confidence triggers:** "project brief", "scope", "deliverables", "let's start", "approve", "green light"
+   - **Medium confidence triggers:** "timeline", "deadline", "milestones", "sprint", "phase"
+   - **Context signals:** "requirements", "specifications", "technical details", "architecture"
+   - **Action signals:** "begin project", "start development", "move forward"
+
+3. **Identify Protocol Scope (Fallback):**
+   - Scan the request for explicit protocol numbers (e.g., "protocol-01", "protocol 02")
+   - Check for artifact references (e.g., "tone-map.json", "discovery-brief.md")
+   - Look for workflow phase indicators (e.g., "proposal generation", "discovery call", "client discovery")
+
+### Step 2: Protocol Validation & Auto-Selection
+**[STRICT]** Before proceeding with any task, you **MUST**:
+
+1. **Auto-Detect Protocol from Conversation:**
+   **[STRICT]** For transcribed client speech:
+   - **Score Detection Patterns:** Count pattern matches (high confidence = 3 points, medium = 2 points, context = 1 point)
+   - **Select Highest Scoring Protocol:** Protocol with highest score becomes primary context
+   - **Confidence Level:** 
+     - **High (≥5 points):** Proceed with detected protocol
+     - **Medium (3-4 points):** Proceed but flag for confirmation
+     - **Low (<3 points):** Request clarification or use fallback detection
+   
+   **Detection Logic:**
+   ```python
+   # Pseudo-code for detection
+   def detect_protocol_from_speech(text):
+       scores = {"protocol_01": 0, "protocol_02": 0, "protocol_03": 0}
+       
+       # Protocol 01 patterns
+       if any(high_trigger in text.lower() for high_trigger in ["proposal", "quote", "bid"]):
+           scores["protocol_01"] += 3
+       if any(medium_trigger in text.lower() for medium_trigger in ["looking for", "need someone"]):
+           scores["protocol_01"] += 2
+       if any(context in text.lower() for context in ["budget", "pricing"]):
+           scores["protocol_01"] += 1
+       
+       # Protocol 02 patterns
+       if any(high_trigger in text.lower() for high_trigger in ["discovery call", "kickoff"]):
+           scores["protocol_02"] += 3
+       if any(medium_trigger in text.lower() for medium_trigger in ["let's discuss", "schedule"]):
+           scores["protocol_02"] += 2
+       if any(context in text.lower() for context in ["integration", "requirements"]):
+           scores["protocol_02"] += 1
+       
+       # Protocol 03 patterns
+       if any(high_trigger in text.lower() for high_trigger in ["project brief", "let's start"]):
+           scores["protocol_03"] += 3
+       if any(medium_trigger in text.lower() for medium_trigger in ["timeline", "deliverables"]):
+           scores["protocol_03"] += 2
+       
+       # Return highest scoring protocol
+       detected = max(scores, key=scores.get)
+       confidence = "high" if scores[detected] >= 5 else "medium" if scores[detected] >= 3 else "low"
+       return detected, confidence, scores
+   ```
+
+2. **Read Relevant Protocol File:**
+   - Search for protocol files matching detected/identified scope: `.cursor/ai-driven-workflow/{protocol-number}-*.md`
+   - Read the protocol file to understand:
+     - Mission and purpose
+     - Required artifacts and their structure
+     - Workflow phases and steps
+     - Quality gates and validation criteria
+     - Integration points with other protocols
+
+3. **Validate Protocol Match:**
+   - Confirm the task aligns with the protocol's mission
+   - Verify artifact references match expected protocol outputs
+   - Check if prerequisites are met
+   - **For auto-detected protocols:** Validate detection confidence and confirm with user if medium/low confidence
+
+4. **Document Protocol Context:**
+   ```
+   [PROTOCOL VALIDATED] Protocol {number}: {name}
+   Detection Method: {auto-detected|explicit|fallback}
+   Confidence: {high|medium|low}
+   Purpose: {mission}
+   Relevant Phases: {phase-list}
+   ```
+
+### Step 3: Artifact Knowledge Mapping
+**[STRICT]** Even if artifact files don't exist yet, you **MUST** understand their purpose from protocol documentation:
+
+**Example Artifact Knowledge Pattern:**
+```json
+{
+  "artifact_path": ".artifacts/protocol-01/tone-map.json",
+  "what": "Client-mirroring lexicon (preferred verbs/nouns, formality scale, domain jargon)",
+  "why": "Immediate language match → faster rapport and clarity",
+  "used_when": "Word choice rewrite and final phrasing",
+  "key_fields": ["keywords", "synonyms", "register (casual/neutral/formal)"],
+  "if_missing": "Off-vibe phrasing, subtle friction",
+  "protocol_source": "01-client-proposal-generation.md",
+  "creation_phase": "Phase 2 — Tone & Human Voice Strategy"
+}
+```
+
+**Artifact Knowledge Discovery Process:**
+1. **Extract from Protocol:**
+   - Search protocol file for artifact path references
+   - Read artifact schema definitions or example structures
+   - Identify creation phase and usage context
+
+2. **Map Structure:**
+   - Document expected fields and their purposes
+   - Understand validation requirements
+   - Note downstream dependencies (which protocols consume this artifact)
+
+3. **Store Knowledge Context:**
+   - Create mental mapping of artifact → purpose → protocol → phase
+   - Use this knowledge to guide decisions even when files don't exist
+
+---
+
+## Artifact Purpose Knowledge Base
+
+### Protocol 01 Artifacts
+**Source:** `.cursor/ai-driven-workflow/01-client-proposal-generation.md`
+
+#### `tone-map.json`
+- **What:** Client-mirroring lexicon (preferred verbs/nouns, formality scale, domain jargon)
+- **Why:** Immediate language match → faster rapport and clarity
+- **Used-when:** Word choice rewrite and final phrasing
+- **Key fields:** `keywords`, `synonyms`, `register` (casual/neutral/formal)
+- **If missing:** Off-vibe phrasing, subtle friction
+- **Created:** Phase 2 — Tone & Human Voice Strategy
+- **Consumed by:** Protocol 02, Protocol 03
+
+#### `jobpost-analysis.json`
+- **What:** Parsed job post with objectives, tone signals, risks, and vague requirements
+- **Why:** Structured extraction of client language and pain points
+- **Used-when:** Proposal drafting, tone calibration, pricing analysis
+- **Key fields:** `exact_quotes`, `tech_stack`, `pain_points`, `tone_type`, `urgency_signals`, `vague_requirements`
+- **If missing:** Cannot generate human-simulated proposal
+- **Created:** Phase 1 — Manual Job Post Extraction
+- **Consumed by:** Protocol 02, Protocol 03
+
+#### `pricing-analysis.json`
+- **What:** Workload estimation, rate tier alignment, milestone breakdown
+- **Why:** Realistic pricing tied to effort with market validation
+- **Used-when:** Proposal pricing section, milestone negotiation
+- **Key fields:** `workload_estimate`, `rate_tier`, `milestones`, `assumptions`, `risk_notes`
+- **If missing:** Cannot provide accurate pricing to client
+- **Created:** Phase 3 — Pricing & Scope Calibration
+- **Consumed by:** Protocol 02
+
+#### `humanization-log.json`
+- **What:** Human voice strategy execution log
+- **Why:** Track contractions, uncertainty statements, forbidden phrase avoidance
+- **Used-when:** Proposal validation, downstream humanization checks
+- **Key fields:** `target_tone`, `contraction_count`, `uncertainty_line`, `forbidden_phrases_checklist`
+- **If missing:** Cannot validate human voice compliance
+- **Created:** Phase 2 & Phase 4
+- **Consumed by:** Quality Gate 3
+
+### Protocol 02 Artifacts
+**Source:** `.cursor/ai-driven-workflow/02-client-discovery-initiation.md`
+
+#### `discovery-brief.md`
+- **What:** Pre-call summary of business goals, users, metrics, constraints, tone
+- **Why:** Consolidate proposal and job post into actionable discovery toolkit
+- **Used-when:** Pre-call preparation, live call reference
+- **Key fields:** Business Goals, Target Users, Success Metrics, Constraints, Client Tone
+- **If missing:** Cannot conduct effective discovery call
+- **Created:** Phase 1 — Context Consolidation
+- **Consumed by:** Protocol 03
+
+#### `question-bank.md`
+- **What:** Prioritized discovery questions grouped by theme
+- **Why:** Ensure all unanswered items are confirmed live with client
+- **Used-when:** Live discovery call, post-call consolidation
+- **Key fields:** Business Outcomes, User Journeys, Functional Scope, Technical Stack, Integrations, Compliance, Delivery Logistics
+- **If missing:** Missing critical discovery questions
+- **Created:** Phase 2 — Question & Scenario Preparation
+- **Consumed by:** Live call notes template
+
+#### `integration-inventory.md`
+- **What:** System dependencies, data owners, access requirements, risk flags
+- **Why:** Prefill integration knowledge before call, update with confirmed answers
+- **Used-when:** Pre-call preparation, post-call updates, Protocol 03 handoff
+- **Key fields:** System, Purpose, Owner, Data Availability, Risk, Next Action
+- **If missing:** Cannot track integration dependencies
+- **Created:** Phase 2 (prefill), Phase 4 (update)
+- **Consumed by:** Protocol 03
+
+---
+
+## Pre-Call Artifact Loading & Discovery Setup
+
+### Pre-Call Initialization
+**[STRICT]** Before any video call starts, you **MUST** load existing artifacts:
+
+1. **Load Protocol 01 Core Artifacts (Consume/Read-Only):**
+   - `.artifacts/protocol-01/jobpost-analysis.json` (client language, pain points, tech stack)
+   - `.artifacts/protocol-01/tone-map.json` (client tone, preferred language)
+   - `.artifacts/protocol-01/humanization-log.json` (human voice strategy execution log)
+   - `.artifacts/protocol-01/pricing-analysis.json` (pricing structure, milestones)
+   - `.artifacts/protocol-01/PROPOSAL.md` (proposal content, commitments)
+   - `.artifacts/protocol-01/proposal-summary.json` (proposal highlights for Protocol 03)
+   - **Supporting (Optional):**
+     - `.artifacts/protocol-01/notes.md` (working notes, red flags)
+     - `JOB-POST.md` (source copy if available)
+   - **Purpose:** Understand client context, tone, and proposal commitments
+
+2. **Load Protocol 02 Pre-Call Intelligence (Load for Ghostwriting Cues):**
+   - `.artifacts/protocol-02/discovery-brief.md` (business goals, users, metrics, tone)
+   - `.artifacts/protocol-02/assumptions-gaps.md` (pending questions, unknowns)
+   - `.artifacts/protocol-02/risk-opportunity-list.md` (initial risks, blockers, opportunities)
+   - `.artifacts/protocol-02/question-bank.md` (prioritized discovery questions by theme)
+   - `.artifacts/protocol-02/integration-inventory.md` (known systems, dependencies, access requirements)
+   - `.artifacts/protocol-02/scenario-guides.md` (pivot playbooks for common scenarios)
+   - `.artifacts/protocol-02/call-agenda.md` (call structure, themes, checklist)
+   - `.artifacts/protocol-02/discovery-call-notes.md` (live notes template)
+   - `.artifacts/protocol-02/ready-for-call-summary.md` (readiness confirmation, top questions)
+   - **Upstream Inputs (From Protocol 01 & Client):**
+     - `.artifacts/protocol-01/PROPOSAL.md` (already loaded above)
+     - `.artifacts/protocol-01/proposal-summary.json` (already loaded above)
+     - `.artifacts/protocol-01/job-post.md` (saved copy)
+     - `.artifacts/protocol-02/client-reply.md` (if client responded)
+   - **Purpose:** Access discovery questions, track what needs confirmation, guide live conversation
+
+3. **Initialize Discovery Question Tracking:**
+   ```
+   [DISCOVERY SETUP]
+   Loaded artifacts from Protocol 01 & 02
+   Discovery questions ready: {count} questions
+   Questions asked: 0
+   Questions pending: {all_questions}
+   ```
+
+### Post-Call Artifact Reference (For Continuity & Next-Step Prompts)
+**[GUIDELINE]** After discovery call, these artifacts are created/updated for Protocol 03 handoff:
+
+**Post-Call Consolidation Artifacts:**
+- `.artifacts/protocol-02/client-discovery-form.md` (confirmed functional requirements)
+- `.artifacts/protocol-02/scope-clarification.md` (technical stack & constraints)
+- `.artifacts/protocol-02/timeline-discussion.md` (milestones & scheduling)
+- `.artifacts/protocol-02/communication-plan.md` (collaboration expectations)
+- `.artifacts/protocol-02/discovery-recap.md` (client-facing summary & sign-off)
+- `.artifacts/protocol-02/discovery-approval-log.json` (approval tracking)
+- `.artifacts/protocol-02/transcripts/YYYYMMDD-discovery-call.txt` (session evidence)
+
+**Validation & Evidence Artifacts (Optional but Recommended):**
+- `.artifacts/protocol-02/gate0-validation.json` (pre-call readiness)
+- `.artifacts/protocol-02/gate1-data-capture.json` (post-call data capture)
+- `.artifacts/protocol-02/gate2-recap.json` (recap approval)
+- `.artifacts/protocol-02/gate3-handoff.json` (handoff readiness)
+- `.artifacts/protocol-02/evidence-manifest.json` (evidence bundle summary)
+- `.artifacts/protocol-02/handoff-verification.json` (Protocol 03 handoff validation)
+- `.artifacts/project-ledger.json` (updated with archive/checksums)
+
+**Note:** These artifacts are created during/after the call, not loaded pre-call. Reference them when generating post-call responses or Protocol 03 handoff prompts.
+
+### Discovery Question Management
+**[STRICT]** During live calls, track discovery progress:
+
+**Question Status Tracking:**
+- `asked`: Question already asked and answered
+- `pending`: Question needs to be asked
+- `answered`: Client provided answer (log in discovery-call-notes.md)
+- `follow-up`: Requires additional clarification
+
+**Question Priority:**
+- **High priority:** Questions marked `ASK CLIENT` in assumptions-gaps.md
+- **Medium priority:** Questions linked to unresolved assumptions
+- **Low priority:** Exploratory questions for deeper understanding
+
+---
+
+## Live Conversation Detection & Response
+
+### Conversation State Tracking
+**[STRICT]** During live calls, maintain conversation state:
+
+**State Variables:**
+- `current_protocol`: Active protocol being discussed (defaults to Protocol 02 during discovery call)
+- `conversation_phase`: Current phase within protocol
+- `detected_intent`: Last detected intent from client speech
+- `confidence_score`: Detection confidence (high/medium/low)
+- `context_shift_count`: Number of protocol shifts detected
+- `discovery_questions_asked`: List of questions already asked
+- `discovery_questions_pending`: List of questions still needing answers
+- `client_answers`: Tracked answers from client responses
+
+### Real-Time Protocol Detection & Discovery Guidance
+**[STRICT]** For each transcribed client message during live call:
+
+1. **Pre-Process with Loaded Artifacts:**
+   - **Cross-reference client speech** with loaded artifacts (Protocol 01 & 02)
+   - **Match client statements** to discovery questions that need answers
+   - **Identify gaps** where client hasn't provided needed information
+   - **Track answers** to update discovery-call-notes.md
+
+2. **Analyze Input:**
+   - Extract keywords and phrases from transcribed speech
+   - Detect protocol signals (using patterns above)
+   - Calculate confidence score
+   - **Match to discovery questions** from question-bank.md
+
+3. **Generate Discovery-Guided Response:**
+   **[STRICT]** When client provides information:
+   - **Acknowledge answer** and map to corresponding discovery question
+   - **Update question status** (pending → answered)
+   - **Identify next pending question** based on priority
+   - **Generate natural follow-up** that flows conversationally
+   
+   **[STRICT]** When client asks question or needs guidance:
+   - **Reference loaded artifacts** (proposal, discovery brief) for context
+   - **Use discovery questions** as conversation guides
+   - **Maintain conversational tone** matching tone-map.json
+
+4. **Detect Context Shifts:**
+   - If new protocol detected with high confidence → Update `current_protocol`
+   - If protocol shift detected → Announce context shift
+   - If ambiguous → Request clarification
+   - **During discovery call:** Default to Protocol 02 unless explicit shift
+
+### Response Templates by Detected Protocol
+
+#### Protocol 01 Response Pattern
+**When detected:** Client mentions proposal, quote, job post, or pricing
+
+**Response Structure:**
+```
+[AUTO-DETECTED: Protocol 01 - Proposal Generation]
+Based on your mention of {detected_keyword}, I understand you're looking for a proposal.
+
+To create an effective proposal, I'll need to:
+1. Analyze the job post/requirements
+2. Map your tone and communication style
+3. Prepare pricing aligned with scope
+
+Would you like me to:
+- Extract details from a job post?
+- Create a proposal draft?
+- Analyze pricing structure?
+```
+
+#### Protocol 02 Response Pattern (Discovery Call Mode)
+**[STRICT]** During live discovery calls, this is the primary response pattern:
+
+**When client provides information:**
+```
+[CLIENT ANSWER DETECTED]
+Question: {discovery_question_from_bank}
+Answer: {client_response_summary}
+
+[ACKNOWLEDGMENT + NEXT QUESTION]
+Based on what you mentioned about {topic}, I understand that {paraphrased_answer}.
+
+Following up on that, {next_pending_question}?
+```
+
+**When client asks a question:**
+```
+[CLIENT QUESTION DETECTED]
+Question: {client_question}
+
+[RESPONSE USING ARTIFACTS]
+Based on the proposal we prepared, {answer_from_proposal_or_discovery_brief}.
+
+For more context, {reference_to_relevant_artifact_content}.
+
+Would you like me to clarify {related_discovery_question}?
+```
+
+**When guiding discovery flow:**
+```
+[DISCOVERY GUIDANCE]
+Based on our discovery brief, I'd like to confirm {high_priority_question}.
+
+This will help us {reason_linked_to_business_goals}.
+
+{Natural question phrasing matching tone-map.json}
+```
+
+**When detecting gaps:**
+```
+[GAP DETECTED]
+I noticed from the proposal that {assumption_from_assumptions-gaps.md}.
+
+To make sure we're aligned, could you clarify {corresponding_discovery_question}?
+```
+
+#### Protocol 03 Response Pattern
+**When detected:** Client mentions project brief, starting project, or deliverables
+
+**Response Structure:**
+```
+[AUTO-DETECTED: Protocol 03 - Project Brief Creation]
+Based on your mention of {detected_keyword}, it sounds like we're ready to formalize the project.
+
+I'll help you create a comprehensive project brief including:
+1. Scope and deliverables
+2. Timeline and milestones
+3. Technical requirements
+4. Success metrics
+
+Would you like me to:
+- Start project brief creation?
+- Review discovery artifacts?
+- Set up project structure?
+```
+
+### Ambiguous Detection Handling
+**[STRICT]** If detection confidence is low or multiple protocols score equally:
+
+```
+[PROTOCOL DETECTION AMBIGUOUS]
+I detected signals for multiple protocols:
+- Protocol 01: {score} points
+- Protocol 02: {score} points
+- Protocol 03: {score} points
+
+Could you clarify which phase you're in?
+- Creating a proposal?
+- Preparing for discovery call?
+- Starting project documentation?
+```
+
+---
+
+## Execution Protocol
+
+### Pre-Task Checklist
+**[STRICT]** Before executing any task:
+
+- [ ] Default context announced (AI Live Interviews/Discovery Calls)
+- [ ] Protocol identified and validated
+- [ ] Protocol file read and understood
+- [ ] Artifact knowledge mapped (even if files don't exist)
+- [ ] Prerequisites verified
+- [ ] Quality gates understood
+
+### Task Execution Pattern
+1. **Context Announcement**
+   ```
+   [CONTEXT ASSUMPTION] This task is for AI Live Interviews and Discovery Calls workflow.
+   [PROTOCOL VALIDATED] Protocol {X}: {name}
+   ```
+
+2. **Artifact Knowledge Reference**
+   ```
+   [ARTIFACT KNOWLEDGE] Referencing {artifact-path}:
+   - Purpose: {what}
+   - Created in: {phase}
+   - Key fields: {fields}
+   ```
+
+3. **Execution**
+   - Follow protocol workflow steps
+   - Create artifacts if they don't exist (following protocol structure)
+   - Reference artifact knowledge for validation
+
+### Post-Task Validation
+**[STRICT]** After task completion:
+
+- [ ] All referenced artifacts exist or are created
+- [ ] Artifact structure matches protocol specification
+- [ ] Quality gates pass (if applicable)
+- [ ] Protocol handoff requirements met (if applicable)
+
+---
+
+## Integration with Context Discovery Protocol
+
+**[STRICT]** This rule integrates with the Context Discovery Protocol (Master Rule 1):
+
+1. **Before Context Discovery:** Announce default context assumption
+2. **During Context Discovery:** Include protocol validation in rule selection
+3. **After Context Discovery:** Validate protocol match before proceeding
+
+**Conflict Resolution:**
+- If user explicitly states different context → Override default assumption
+- If protocol validation fails → Request clarification before proceeding
+- If artifact knowledge conflicts with existing files → Prefer existing files, document discrepancy
+
+---
+
+## Communication Templates
+
+### Protocol Validation Announcement
+```
+[PROTOCOL VALIDATION] 
+Protocol: {number} - {name}
+Source: {protocol-file-path}
+Mission: {mission-statement}
+Relevant Phases: {phase-list}
+```
+
+### Artifact Knowledge Reference
+```
+[ARTIFACT KNOWLEDGE] {artifact-path}
+Purpose: {what}
+Why: {why}
+Used-when: {used-when}
+Key fields: {key-fields}
+Status: {exists|will-be-created-in-phase-X}
+```
+
+### Context Shift Detection
+```
+[CONTEXT SHIFT DETECTED]
+Previous assumption: AI Live Interviews/Discovery Calls
+New context: {new-context}
+Re-validating protocol...
+```
+
+---
+
+## Quality Gates
+
+### Gate 1: Protocol Validation
+- **Criteria:** Protocol identified and validated before task execution
+- **Pass:** Protocol file read, mission understood, phases mapped
+- **Fail:** Task halted until protocol validated
+
+### Gate 2: Artifact Knowledge Mapping
+- **Criteria:** All referenced artifacts have purpose knowledge mapped
+- **Pass:** Artifact purpose, structure, and usage documented
+- **Fail:** Cannot proceed without artifact knowledge
+
+### Gate 3: Context Consistency
+- **Criteria:** Default context assumption aligns with protocol mission
+- **Pass:** Context matches protocol scope
+- **Fail:** Request user clarification or override default assumption
+
+---
+
+## Error Handling
+
+### Protocol Not Found
+**[STRICT]** If protocol cannot be identified:
+1. List available protocols
+2. Ask user to specify protocol number or name
+3. Do not proceed until protocol validated
+
+### Artifact Knowledge Missing
+**[STRICT]** If artifact purpose cannot be determined from protocol:
+1. Search protocol file for artifact references
+2. Check artifact schema documentation
+3. If still missing, document unknown and proceed with caution
+
+### Context Mismatch
+**[STRICT]** If default assumption conflicts with user request:
+1. Acknowledge conflict
+2. Override default assumption
+3. Re-validate protocol match
+4. Document override reason
+
+---
+
+## Continuous Improvement
+
+**[GUIDELINE]** Maintain artifact knowledge base:
+- Update when new protocols added
+- Document artifact purpose changes
+- Track artifact usage patterns
+- Log context assumption accuracy
+
+---
+
+## Examples
+
+### Example 1: Creating tone-map.json
+```
+[CONTEXT ASSUMPTION] This task is for AI Live Interviews and Discovery Calls workflow.
+[PROTOCOL VALIDATED] Protocol 01: Client Proposal Generation
+[ARTIFACT KNOWLEDGE] .artifacts/protocol-01/tone-map.json
+Purpose: Client-mirroring lexicon for language matching
+Will be created in: Phase 2 — Tone & Human Voice Strategy
+Proceeding with creation following protocol structure...
+```
+
+### Example 2: Using Existing Artifact
+```
+[CONTEXT ASSUMPTION] This task is for AI Live Interviews and Discovery Calls workflow.
+[PROTOCOL VALIDATED] Protocol 02: Client Discovery Initiation
+[ARTIFACT KNOWLEDGE] .artifacts/protocol-02/discovery-brief.md
+Purpose: Pre-call summary consolidating proposal and job post
+Status: Exists (created in Phase 1)
+Using existing artifact for Phase 2 question generation...
+```
+
+### Example 3: Protocol Validation Required
+```
+[CONTEXT ASSUMPTION] This task is for AI Live Interviews and Discovery Calls workflow.
+[PROTOCOL VALIDATION REQUIRED] 
+Referencing artifact: tone-map.json
+Identifying protocol: Protocol 01 (tone-map.json created in Phase 2)
+Reading protocol file: .cursor/ai-driven-workflow/01-client-proposal-generation.md
+[PROTOCOL VALIDATED] Protocol 01: Client Proposal Generation
+Proceeding with task...
+```
+
+### Example 4: Live Conversation Detection (Client Speech)
+```
+[CONTEXT ASSUMPTION] This task is for AI Live Interviews and Discovery Calls workflow.
+[CONVERSATION INPUT] "I need someone to build a mobile app. Can you send me a proposal?"
+
+[AUTO-DETECTED: Protocol 01 - Proposal Generation]
+Detection Method: Pattern matching
+Confidence: High (score: 6)
+Signals detected: "need someone" (2pts), "build" (2pts), "proposal" (3pts), "mobile app" (1pt)
+
+[PROTOCOL VALIDATED] Protocol 01: Client Proposal Generation
+Purpose: Transform job post into human-simulated proposal
+Relevant Phases: Phase 1 (Job Post Extraction), Phase 2 (Tone Mapping), Phase 4 (Draft Proposal)
+
+[AUTO-RESPONSE] Based on your request, I'll help you create a proposal for the mobile app project. 
+To get started, I'll need:
+1. The job post or project requirements
+2. Your preferred tone and communication style
+3. Budget or pricing expectations
+
+Would you like me to analyze a job post document or extract details from your description?
+```
+
+### Example 5: Context Shift Detection
+```
+[CONVERSATION INPUT] "The proposal looks good. Can we schedule a discovery call?"
+
+[CONTEXT SHIFT DETECTED]
+Previous Protocol: Protocol 01 (Proposal Generation)
+New Detection: Protocol 02 (Discovery Preparation)
+Confidence: High (score: 5)
+Signals detected: "discovery call" (3pts), "schedule" (2pts)
+
+[PROTOCOL VALIDATED] Protocol 02: Client Discovery Initiation
+Purpose: Prepare discovery toolkit for live call
+Relevant Phases: Phase 1 (Context Consolidation), Phase 2 (Question Preparation)
+
+[AUTO-RESPONSE] Great! I'll help you prepare for the discovery call. 
+I'll consolidate the proposal details and create:
+1. Discovery brief with key questions
+2. Integration inventory checklist
+3. Call agenda template
+
+Proceeding with Protocol 02 preparation...
+```
+
+### Example 6: Live Discovery Call - Pre-Call Setup
+```
+[PRE-CALL INITIALIZATION]
+Loading artifacts from Protocol 01 & 02...
+
+[ARTIFACTS LOADED]
+✓ Protocol 01: jobpost-analysis.json, tone-map.json, PROPOSAL.md, pricing-analysis.json
+✓ Protocol 02: discovery-brief.md, question-bank.md, integration-inventory.md, assumptions-gaps.md
+
+[DISCOVERY QUESTIONS LOADED]
+Total questions: 15
+High priority: 5 (from assumptions-gaps.md)
+Medium priority: 7
+Low priority: 3
+
+[READY FOR CALL]
+Call agenda loaded from call-agenda.md
+Tone map: {tone_from_tone-map.json}
+Key topics: {topics_from_discovery-brief.md}
+```
+
+### Example 7: Live Discovery Call - Client Provides Information
+```
+[CONVERSATION INPUT] "We need the app to integrate with our existing CRM system, which is Salesforce."
+
+[CLIENT ANSWER DETECTED]
+Question: "What systems need to integrate with the new application?"
+Answer: Salesforce CRM integration required
+
+[MATCHING TO ARTIFACTS]
+Referenced: integration-inventory.md
+Updating: Salesforce entry marked as @ASK_CLIENT → answered
+
+[ACKNOWLEDGMENT + NEXT QUESTION]
+Based on what you mentioned, you need Salesforce CRM integration. That's helpful context.
+
+For the integration, I'd like to understand the data flow better. What specific data fields need to sync between the new app and Salesforce?
+```
+
+### Example 8: Live Discovery Call - Client Asks Question
+```
+[CONVERSATION INPUT] "How long will this project take?"
+
+[CLIENT QUESTION DETECTED]
+Question: Timeline inquiry
+
+[RESPONSE USING ARTIFACTS]
+Based on the proposal we prepared, the estimated timeline is {timeline_from_PROPOSAL.md}, broken down into {milestones_from_pricing-analysis.json}.
+
+However, that timeline assumed {assumptions_from_assumptions-gaps.md}. Now that we're clarifying requirements, would you like me to revise the timeline based on today's discussion?
+
+[FOLLOW-UP DISCOVERY QUESTION]
+Speaking of timeline, what's your target launch date? This will help us prioritize features and adjust the schedule accordingly.
+```
+
+### Example 9: Live Discovery Call - Gap Detection
+```
+[CONVERSATION INPUT] "The app needs to handle about 10,000 users initially."
+
+[CLIENT ANSWER DETECTED]
+Question: "What's the expected user scale?"
+Answer: 10,000 initial users
+
+[GAP DETECTED]
+I noticed from the proposal that we didn't specify user scale assumptions. You mentioned 10,000 users initially.
+
+[CLARIFYING QUESTION]
+To ensure we design the right architecture, could you clarify:
+- Is this concurrent users or total registered users?
+- What's the expected growth over the next 12 months?
+- Are there peak usage times we should account for?
+
+[UPDATING ARTIFACTS]
+Updating discovery-call-notes.md with client answer
+Marking related questions in assumptions-gaps.md as answered
+```

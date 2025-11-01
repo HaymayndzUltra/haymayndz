@@ -1,0 +1,163 @@
+---
+description: "TAGS: [global,context,refresh,cache,performance] | TRIGGERS: context refresh,artifact update,cache stale,context reload | SCOPE: global | DESCRIPTION: Defines protocol for automatic context refresh when artifacts change, ensuring cached context stays synchronized with source files."
+alwaysApply: false
+---
+
+# Master Rule: Context Refresh Protocol
+
+## 1. Purpose
+
+This rule governs the automatic detection and refresh of cached context when source artifacts change. It ensures that the AI agent always works with up-to-date information without requiring manual cache reloads.
+
+## 2. Core Principle
+
+**[STRICT]** Cached context must always reflect the current state of source artifacts. When artifacts change, the cache must be refreshed incrementally to maintain performance while ensuring accuracy.
+
+## 3. Refresh Detection Protocol
+
+### Step 1: Staleness Check
+
+**[STRICT]** Before loading context from cache, you **MUST** check for staleness:
+
+1. **Load cache metadata** from `.cursor/cache/preload_context.json`
+2. **Compare file modification times** between cache entries and source files
+3. **Identify stale files** where `source_mtime > cache_mtime`
+4. **Trigger refresh** if any files are stale
+
+**Implementation:**
+```python
+# Run staleness check
+python3 .cursor/scripts/watch_artifacts.py --check-only
+```
+
+### Step 2: Incremental Refresh
+
+**[STRICT]** When staleness is detected:
+
+1. **Do NOT** reload entire cache
+2. **DO** refresh only stale files using incremental updater
+3. **DO** preserve non-stale files in cache
+4. **DO** update cache metadata with new timestamps
+
+**Implementation:**
+```python
+# Refresh stale files only
+python3 .cursor/scripts/incremental_context_update.py --refresh
+```
+
+## 4. Integration Points
+
+### Integration with Context Discovery Protocol
+
+**[STRICT]** This rule integrates with `1-master-rule-context-discovery.mdc`:
+
+1. **Before Step 2 (Operational Context Gathering):**
+   - Run staleness check
+   - If stale files detected, run incremental refresh
+   - Continue with refreshed cache
+
+2. **During Rule Loading:**
+   - Check if loaded rules are stale
+   - Refresh individual rule if detected as stale
+   - Continue loading process
+
+### Integration with Agent Configuration
+
+**[STRICT]** Update `.cursor/agents/context-aware.json`:
+
+```json
+{
+  "contextRefresh": "auto",
+  "autoRefresh": true,
+  "refreshCheckInterval": 60,
+  "stalenessThreshold": 0
+}
+```
+
+## 5. Performance Considerations
+
+**[GUIDELINE]** Optimize refresh performance:
+
+- **Incremental updates:** Only refresh changed files
+- **Parallel processing:** Process multiple files concurrently where safe
+- **Cache validation:** Verify cache integrity after refresh
+- **Fallback strategy:** If refresh fails, use stale cache with warning
+
+## 6. Error Handling
+
+**[STRICT]** Handle refresh failures gracefully:
+
+1. **If refresh fails:**
+   - Log error to `.cursor/logs/refresh_errors.json`
+   - Continue with existing cache (stale but available)
+   - Alert user that cache may be outdated
+
+2. **If cache corrupt:**
+   - Attempt to restore from backup
+   - If backup unavailable, trigger full reload
+   - Regenerate cache from scratch
+
+## 7. Monitoring
+
+**[GUIDELINE]** Track refresh metrics:
+
+- **Refresh frequency:** How often refreshes occur
+- **Refresh duration:** Time taken for incremental refresh
+- **Files refreshed:** Count of files updated per refresh
+- **Refresh failures:** Error rate and types
+
+## 8. Usage Examples
+
+### Example 1: Automatic Refresh Before Context Load
+
+```
+User: "Load discovery call context"
+
+AI Process:
+1. Check staleness → Found 3 stale files
+2. Run incremental refresh → Updated 3 files (50ms)
+3. Load context from refreshed cache
+4. Continue with context discovery
+```
+
+### Example 2: Manual Refresh Trigger
+
+```
+User: "Refresh context cache"
+
+AI Process:
+1. Run staleness check
+2. Refresh all stale files
+3. Report refresh results
+```
+
+## 9. Success Criteria
+
+**Refresh Performance:**
+- Staleness check latency < 50ms
+- Incremental refresh latency < 500ms for <10 files
+- Cache hit rate ≥ 90% (after refresh)
+
+**Accuracy:**
+- Artifact freshness = 100% (all files up to date)
+- Zero stale files in active cache
+- Cache metadata accurate
+
+## 10. Troubleshooting
+
+**Common Issues:**
+
+1. **Refresh not triggering:**
+   - Check if `watch_artifacts.py` detects file changes
+   - Verify cache file permissions
+   - Check file modification times
+
+2. **Refresh too slow:**
+   - Reduce number of files being refreshed
+   - Optimize file reading operations
+   - Use parallel processing for multiple files
+
+3. **Cache corruption:**
+   - Restore from backup
+   - Regenerate cache if backup unavailable
+   - Check disk space and permissions

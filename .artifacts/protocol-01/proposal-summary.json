@@ -1,0 +1,28 @@
+{
+  "differentiators": [
+    "Built and shipped own SaaS products (solo/small team)",
+    "Full-stack experience across Next.js, Node, Supabase, Postgres",
+    "AI/LLM integration expertise",
+    "Mentoring-focused approach with teaching mindset"
+  ],
+  "pricing_summary": {
+    "hourly_rate": 100,
+    "rate_tier": "mid-to-senior",
+    "pricing_structure": "hourly_with_cap",
+    "weekly_cap_hours": 15,
+    "weekly_cap_amount": 1500,
+    "monthly_estimate": 6000
+  },
+  "next_steps": [
+    "15-20 minute alignment call",
+    "Available weekdays 9am-6pm EST or async",
+    "Clarify timeline for getting started"
+  ],
+  "key_questions_for_client": [
+    "Expected weekly time commitment for part-time engagement?",
+    "Preferred communication format: scheduled calls, async chat, or both?",
+    "Specific technical areas to focus on first, or assess based on current progress?",
+    "Timeline for getting started?"
+  ]
+}
+

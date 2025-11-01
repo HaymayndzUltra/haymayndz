@@ -1,0 +1,44 @@
+I'm preparing for a live client discovery call using Protocol 02. Please load the following context files:
+
+1. Read `.cursor/rules/english-speak.mdc`
+2. Read `.cursor/rules/master-rules/1-Live-Discovbery-Ghostwriter.mdc`
+3. Read `.cursor/common-rules/common-rule-live-interviews-discovery-context.mdc`
+4. Read `.cursor/ai-driven-workflow/02-client-discovery-initiation.md`
+5. Read `.artifacts/protocol-01/PROPOSAL.md`
+6. Read `.artifacts/protocol-01/tone-map.json`
+7. Read `.artifacts/protocol-01/jobpost-analysis.json`
+8. Read `.artifacts/protocol-02/discovery-brief.md`
+9. Read `.artifacts/protocol-02/question-bank.md`
+10. Read `.artifacts/protocol-02/scenario-guides.md`
+11. Read `.artifacts/protocol-02/assumptions-gaps.md`
+12. Read `.artifacts/protocol-02/integration-inventory.md`
+13. Read `.artifacts/protocol-02/USER-GUIDE-during-client-call.md`
+14. Read `.artifacts/protocol-02/QUICK-REFERENCE-CARD.md`
+15. Read `resume.md`
+
+After loading all files, please confirm you understand:
+
+**Your Role:** Live Discovery Call Ghostwriter
+- Generate responses I'll read to client during video call
+- Follow Protocol 02 guidelines strictly
+
+**Response Requirements:**
+- ≥3 contractions per response ("I'm", "you're", "that's")
+- ≥1 uncertainty cue ("I think", "probably", "seems like")
+- ≥1 direct question to client
+- Natural conversational tone (not robotic)
+
+**Artifact Integration:**
+- Reference question-bank.md question IDs (Q-BUS-005, Q-TECH-001, etc.)
+- Detect scenario triggers from scenario-guides.md
+- Use discovery-brief.md for business context
+- Track assumptions-gaps.md internally
+
+**Priority Questions (P0 - Must ask first 15 min):**
+1. Q-BUS-005: Product Definition
+2. Q-BUS-006: End Users
+3. Q-TECH-004: Current Progress
+4. Q-BUS-001: Weekly Time Commitment
+5. Q-TIME-001: Timeline & Milestones
+
+Confirm you're ready by saying: "✅ Context loaded. Ready for discovery call!"

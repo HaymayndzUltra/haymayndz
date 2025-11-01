@@ -1,0 +1,78 @@
+{
+  "retry": {
+    "max_attempts": 3,
+    "initial_delay": 1.0,
+    "max_delay": 10.0,
+    "exponential_base": 2.0,
+    "jitter": true
+  },
+  "circuit_breaker": {
+    "failure_threshold": 5,
+    "timeout": 60,
+    "half_open_timeout": 30,
+    "circuits": {
+      "artifact_loading": {
+        "failure_threshold": 3,
+        "timeout": 30
+      },
+      "cache_refresh": {
+        "failure_threshold": 5,
+        "timeout": 60
+      },
+      "response_validation": {
+        "failure_threshold": 10,
+        "timeout": 120
+      }
+    }
+  },
+  "fallback": {
+    "enabled": true,
+    "timeout_ms": 100,
+    "strategies": {
+      "artifact_loading": "use_cached",
+      "cache_refresh": "skip_refresh",
+      "response_validation": "skip_validation"
+    }
+  },
+  "error_classification": {
+    "transient_patterns": [
+      "timeout",
+      "connection",
+      "network",
+      "temporary",
+      "retry",
+      "busy",
+      "unavailable",
+      "service unavailable",
+      "try again"
+    ],
+    "permanent_patterns": [
+      "not found",
+      "permission denied",
+      "invalid",
+      "forbidden",
+      "unauthorized",
+      "does not exist",
+      "access denied"
+    ],
+    "network_errors": [
+      "ConnectionError",
+      "TimeoutError",
+      "socket.error",
+      "urllib.error.URLError"
+    ],
+    "file_system_errors": [
+      "FileNotFoundError",
+      "PermissionError",
+      "IsADirectoryError",
+      "NotADirectoryError"
+    ]
+  },
+  "logging": {
+    "level": "INFO",
+    "log_file": ".cursor/logs/error_log.json",
+    "max_entries": 1000,
+    "rotation": "daily"
+  }
+}
+

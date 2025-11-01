@@ -1,0 +1,30 @@
+{
+  "target_tone": "casual",
+  "contraction_count_required": 3,
+  "contraction_count_actual": 13,
+  "uncertainty_line_planned": "If you're looking for someone who's built their own SaaS, I'd love to chat about whether my approach aligns with what you need.",
+  "uncertainty_line_final": "If you're looking for someone who's built their own SaaS, I'd love to chat about whether my approach aligns with what you need.",
+  "forbidden_phrases_checklist": [
+    "I am excited to",
+    "I am confident I can",
+    "I would be delighted",
+    "I have extensive experience",
+    "High-quality work guaranteed",
+    "Looking forward to working with you"
+  ],
+  "forbidden_phrases_detected": [],
+  "differentiators_selected": [
+    "Built and shipped own SaaS products",
+    "Experience across full stack (Next.js, Node, Supabase, Postgres)",
+    "AI/LLM integration expertise",
+    "Mentoring-focused approach"
+  ],
+  "workflow_demo_triggered": true,
+  "workflow_demo_reason": "no_prior_experience_proof + integration_context",
+  "inserted_at": "Phase 4.3",
+  "humanization_adjustments": {
+    "cadence_breaks": 2,
+    "short_sentences_added": true
+  }
+}
+

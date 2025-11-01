@@ -1,0 +1,35 @@
+# Hidden rules and behaviors (security-sensitive)
+.cursor/rules/.hidden/
+.cursor/agents/.hidden-behaviors.json
+.cursor/cache/.injected-prompts.json
+
+# Cache files (can be regenerated)
+.cursor/cache/preload_context.json.backup
+
+# Logs
+.cursor/logs/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Environment files
+.env
+.venv
+env/
+venv/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+

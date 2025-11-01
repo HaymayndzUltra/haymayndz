@@ -1,0 +1,16 @@
+{
+  "tone_type": "casual",
+  "confidence": 0.92,
+  "indicators": [
+    "I'm building",
+    "I've reached",
+    "I'm looking",
+    "you're the kind",
+    "this will be a great fit"
+  ],
+  "formality_level": "low",
+  "communication_style": "conversational",
+  "urgency_level": "moderate",
+  "differentiator_emphasis": "experience_and_mentorship"
+}
+
